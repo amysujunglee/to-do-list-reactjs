@@ -1,11 +1,21 @@
 import { useState } from 'react';
-import { ToDoForm } from "./ToDoForm";
+import { TodoForm } from './TodoForm';
+import { v4 as uuidv4 } from 'uuid';
+import { Todo } from './Todo';
+uuidv4();
 
-export const ToDoWrapper = () => {
-    const [todos, setTodos] = useState([]);
+export const TodoWrapper = () => {
+    const [todos, setTodos] = useState([]); // to create the to do state? to get the input value from ToDoForm.js
+
+    const addTodo = (todo) => {
+        setTodos([...todos, { id: uuidv4(), task: todo, completed: false, isEditing: false }])
+        console.log(todos);
+    };
+
     return (
         <div className="TodoWrapper">
-            <ToDoForm />
+            <TodoForm addTodo={addTodo} />
+            <Todo />
         </div>
     )
 }
